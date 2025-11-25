@@ -28,6 +28,15 @@ async function run() {
     
     await client.connect();
     
+    const db = client.db("momentumDB");
+    const eventCollections = db.collection("events")
+
+    // get all Events API
+    app.get("/events", async(req, res) =>{
+        console.log("clicked")
+        const result = await eventCollections.find().toArray();
+        res.send(result)
+    })
 
 
     await client.db("admin").command({ ping: 1 });
