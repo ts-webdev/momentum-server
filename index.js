@@ -61,6 +61,14 @@ async function run() {
       res.send(result);
     });
 
+    // delete event
+    app.delete("/events/:id", async(req, res)=>{
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await eventCollections.deleteOne(query);
+      res.send(result)
+    })
+
     // get all blog posts
     app.get("/blogs", async (req, res) => {
       const result = await blogCollections.find().toArray();
